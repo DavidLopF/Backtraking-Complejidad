@@ -1,5 +1,19 @@
 package co.edu.unbosque.controller;
 
-public class Controller {
+import co.edu.unbosque.view.View;
 
+public class Controller {
+	
+	private View view;
+	
+	public Controller() {
+		view = new View();
+		funcionar(); 
+	}
+
+	private void funcionar() {
+		String a = view.menuPrincipal();
+		System.out.println(a);
+		
+	}
 }
