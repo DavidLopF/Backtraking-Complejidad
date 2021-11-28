@@ -14,6 +14,9 @@ public class Controller {
 	private void funcionar() {
 		String a = view.menuPrincipal();
 		System.out.println(a);
-		
+		//xdddddddddddddddd
+		//nbeda
+		//dsafga
+		System.out.println("pene");
 	}
 }
