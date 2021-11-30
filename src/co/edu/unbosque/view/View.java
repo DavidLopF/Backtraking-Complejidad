@@ -3,7 +3,7 @@ package co.edu.unbosque.view;
 import javax.swing.JOptionPane;
 
 public class View {
-	
+
 	public void mostrarMensaje(String a) {
 		JOptionPane.showMessageDialog(null, a);
 	}
@@ -18,9 +18,13 @@ public class View {
 		int num = 0;
 		while (!esNumeroInt(a)) {
 
-			System.out.println("ERROR.. NO ES ENTERO.");
-			a = JOptionPane.showInputDialog(titulo);
-			num = 0;
+			if(a != "") {
+				System.out.println("ERROR.. NO ES ENTERO.");
+				a = JOptionPane.showInputDialog(titulo);
+				num = 0;
+			}else {
+				System.exit(0);
+			}
 
 		}
 		num = Integer.parseInt(a);
@@ -39,8 +43,7 @@ public class View {
 	}
 
 	public String menuPrincipal() {
-		Object[] opciones = { "1. Algoritmo de floyd.", "2. Problema del viajero", "3. Multipicacion de matrices",
-				"4. Problema de asignación de tareas", "5. Coeficiente binomiales", "6. Salir" };
+		Object[] opciones = { "1. Backtracking-1.", "2. Backtracking-2.", "3. Rama y poda", "4. Salir" };
 		Object opcion = JOptionPane.showInputDialog(null,
 				"      ..:Bienvenido señor usuario :..                "
 						+ "\n\n\nSelecciona un operacion a realizar:    ",
