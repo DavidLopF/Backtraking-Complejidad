@@ -18,13 +18,9 @@ public class View {
 		int num = 0;
 		while (!esNumeroInt(a)) {
 
-			if(a != "") {
-				System.out.println("ERROR.. NO ES ENTERO.");
-				a = JOptionPane.showInputDialog(titulo);
-				num = 0;
-			}else {
-				System.exit(0);
-			}
+			System.out.println("ERROR.. NO ES ENTERO.");
+			a = JOptionPane.showInputDialog(titulo);
+			num = 0;
 
 		}
 		num = Integer.parseInt(a);

@@ -32,14 +32,17 @@ public class Controller {
 
 			try {
 				if (datos.length > 1) {
-					poda = new RamaPoda(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]));
-					view.capturarInt("Ahora se mostrara el campo creado:\n\n"+poda.mostrarMatriz());
+
+					int x = view.capturarInt("Ingrese posicion del conejo para el eje x: ");
+					int y = view.capturarInt("Ingrese posicion del conejo para el eje y: ");
+					
+					
+
 				} else {
 					view.mostrarMensaje("Datos invalidos, recuerde que los datos deben estar separados por ; (25;25)");
 					datos = null;
 					dimenciones = null;
 					funcionar();
-
 				}
 			} catch (Exception e) {
 				view.mostrarMensaje("Datos invalidos, recuerde que los datos deben estar separados por ; (25;25)");
@@ -57,4 +60,5 @@ public class Controller {
 
 		}
 	}
+
 }

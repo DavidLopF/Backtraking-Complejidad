@@ -24,5 +24,10 @@ public class RamaPoda {
 
 		return a;
 	}
+	
+	public void inicializarConejo() {
+		
+		
+	}
 
 }
