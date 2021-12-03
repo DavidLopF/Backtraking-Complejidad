@@ -34,7 +34,7 @@ public class View {
 		return num;
 	}
 
-	private boolean esNumeroInt(String mensaje) {
+	public boolean esNumeroInt(String mensaje) {
 		try {
 			Integer.parseInt(mensaje);
 			return true;
