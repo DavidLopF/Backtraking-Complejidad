@@ -16,8 +16,8 @@ public class Controller {
 	private void funcionar() {
 		String a = view.menuPrincipal();
 		switch (a) {
-		case "1. Backtracking-1":
-
+		case "1. Nutricionista - Backtracking":
+			int calorias = view.capturarInt("Ingrese el número de calorías máximas a consumir:");
 			break;
 
 		case "2. Backtracking-2.":
