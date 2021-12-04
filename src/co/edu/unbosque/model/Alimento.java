@@ -1,12 +1,21 @@
 package co.edu.unbosque.model;
 
-import java.util.Objects;
-
+/**
+ * 
+ * @author David Lopez, Daniel Mejia y Juan Perez
+ *
+ */
 public class Alimento {
 	
 	private String nom_alimento;
 	private int calorias;
 	
+	
+	/**
+	 * Metodo constructor de la clase alimento
+	 * @param pAlimento  nombre del alimento
+	 * @param PCalorias  numeor de calorias
+	 */
 	public Alimento(String pAlimento, int PCalorias) {
 		nom_alimento = pAlimento;
 		calorias = PCalorias;
@@ -40,12 +49,16 @@ public class Alimento {
 		this.calorias = calorias;
 	}
 
-	@Override
+	/**
+	 * Metodo encargado de hacer toString de los atributos
+	 */
 	public String toString() {
 		return "Alimento: " + nom_alimento + " - Calorias: " + calorias +"";
 	}
 
-	@Override
+	/**
+	 * Metodo encargado de hacer validaciones
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

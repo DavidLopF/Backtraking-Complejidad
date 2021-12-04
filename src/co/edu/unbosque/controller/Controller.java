@@ -1,36 +1,49 @@
 package co.edu.unbosque.controller;
 
 import java.util.ArrayList;
-
 import co.edu.unbosque.model.Alimento;
 import co.edu.unbosque.model.Menu;
 import co.edu.unbosque.model.RamaPoda;
 import co.edu.unbosque.view.View;
 
+
+/**
+ * 
+ * @author David Lopez, Daniel Mejia y Juan Perez
+ *
+ */
 public class Controller {
 
 	private View view;
 	private RamaPoda poda;
 
+	
+	
 	public Controller() {
 
 		view = new View();
 		funcionar();
 	}
 
+	
+	/**
+	 * Metodo encargado de hacer funcionar el programa
+	 */
 	private void funcionar() {
 		String a = view.menuPrincipal();
 		switch (a) {
 		case "1. Nutricionista - Backtracking":
-			int cal_max = view.capturarInt("Menu Disponible:\n\n"+mostrarMenu(retornarAlimentos())+"\nIngrese la cantidad de calorias a consumir:\n");
+			int cal_max = view.capturarInt("Menu Disponible:\n\n" + mostrarMenu(retornarAlimentos())
+					+ "\nIngrese la cantidad de calorias a consumir:\n");
 			Menu menu_bas = new Menu(cal_max, retornarAlimentos().length);
 			Menu mejor_menu = new Menu(cal_max, retornarAlimentos().length);
 			nutricionistaMenu(menu_bas, retornarAlimentos(), false, mejor_menu);
-			view.mostrarMensaje("Aqui tienes el resultado de tus preferencias en calorias:\n\n" + mejor_menu.toString());
+			view.mostrarMensaje(
+					"Aqui tienes el resultado de tus preferencias en calorias:\n\n" + mejor_menu.toString());
 			if (mejor_menu.getCal() != cal_max) {
 				nutricionistaMenu100(menu_bas, retornarAlimentos(), false, mejor_menu);
-				view.mostrarMensaje("Tenemos esta opcion pero con mas calorias, si prefieres: \n\n" + mejor_menu.toString()
-						+ "\nGracias por solicitar nuestro servicio:");	
+				view.mostrarMensaje("Tenemos esta opcion pero con mas calorias, si prefieres: \n\n"
+						+ mejor_menu.toString() + "\nGracias por solicitar nuestro servicio:");
 			}
 			break;
 
@@ -39,30 +52,35 @@ public class Controller {
 			break;
 
 		case "3. Rama y poda":
-			String dimenciones = view
-					.capturarString("Ingrese cantidad dimenciones del campo separados por ; (punto y coma):  ");
-
-			String[] datos = dimenciones.split(";");
-
+			String dimenciones = view.capturarString(
+					"Ingrese cantidad dimenciones del campo separados por ( - )\nprimero las filas luego las columnas:  ");
+			String[] datos = dimenciones.split("-");
 			try {
-				if (datos.length > 1) {
-					poda = new RamaPoda(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]));
-					view.capturarInt("Ahora se mostrara el campo creado:\n\n" + poda.mostrarMatriz());
-				} else {
-					view.mostrarMensaje("Datos invalidos, recuerde que los datos deben estar separados por ; (25;25)");
-					datos = null;
-					dimenciones = null;
-					funcionar();
 
-				}
+				poda = new RamaPoda(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]));
+
+				int x = view.capturarInt("Ingrese posicion del conejo para el eje x: ");
+				int y = view.capturarInt("Ingrese posicion del conejo para el eje y: ");
+
+				poda.inicializarConejo(x, y);
+
+				String posfin = view.capturarString("Conejo posicionado en " + x + " y " + y + "\n\n"
+						+ poda.mostrarMatriz()
+						+ "\nPor favor ingrese posicion a la cual quier que se mueva el conejo, separado por ( - )");
+
+				datos = posfin.split("-");
+
+				poda.recorridos(Integer.parseInt(datos[0]), Integer.parseInt(datos[0]), 0, 0);
+
+				view.mostrarMensaje(poda.mostrarLista());
+
 			} catch (Exception e) {
 				view.mostrarMensaje("Datos invalidos, recuerde que los datos deben estar separados por ; (25;25)");
-				datos = null;
 				dimenciones = null;
+				datos = null;
 				funcionar();
 
 			}
-
 			break;
 
 		case "4. Salir":
@@ -73,21 +91,14 @@ public class Controller {
 	}
 
 	public Alimento[] retornarAlimentos() {
-		Alimento[] alimentos = { 
-				new Alimento("Tamal", 900), 
-				new Alimento("Jugo de mora", 300),
-				new Alimento("Ensalda césar", 120), 
-				new Alimento("Gaseosa", 450), 
-				new Alimento("Lentejas", 250),
-				new Alimento("Papa a la francesa", 220), 
-				new Alimento("Pollo apanado", 350),
-				new Alimento("Huevo cocinado", 100), 
-				new Alimento("Queso campesino", 130),
-				new Alimento("Chorizo", 600),
+		Alimento[] alimentos = { new Alimento("Tamal", 900), new Alimento("Jugo de mora", 300),
+				new Alimento("Ensalda césar", 120), new Alimento("Gaseosa", 450), new Alimento("Lentejas", 250),
+				new Alimento("Papa a la francesa", 220), new Alimento("Pollo apanado", 350),
+				new Alimento("Huevo cocinado", 100), new Alimento("Queso campesino", 130), new Alimento("Chorizo", 600),
 				new Alimento("Hamburguesa ", 700) };
 		return alimentos;
 	}
-	
+
 	public String mostrarMenu(Alimento[] alimentos) {
 		String r = "";
 		for (int i = 0; i < alimentos.length; i++) {

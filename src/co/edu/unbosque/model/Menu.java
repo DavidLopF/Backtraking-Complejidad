@@ -1,13 +1,23 @@
 package co.edu.unbosque.model;
 
+/**
+ * 
+ * @author David Lopez, Daniel Mejia y Juan Perez
+ *
+ */
 public class Menu {
 
 	
 	private int caloriasMax;
 	private Alimento[] alimentos;
-	
 	private int cal;
 	
+	
+	/**
+	 * Metodo constructor de la clase menu
+	 * @param pCaloriasMax numero de calorias maximas
+	 * @param numAlimentos numero de alimentos
+	 */
 	public Menu(int pCaloriasMax, int numAlimentos) {
 		caloriasMax = pCaloriasMax;
 		alimentos = new Alimento[numAlimentos];
@@ -56,6 +66,11 @@ public class Menu {
 		this.cal = cal;
 	}
 	
+	
+	/**
+	 * Metodo encargado de añadir alimentos
+	 * @param a alimetno
+	 */
 	public void addAlimento(Alimento a) {
 		for (int i = 0; i < alimentos.length; i++) {
             if (alimentos[i] == null) {
@@ -66,6 +81,9 @@ public class Menu {
         }
 	}
 	
+	/**
+	 * Metodo que vacia la lista de alimentos
+	 */
 	public void vaciar() {
 		this.cal = 0;
 		for (int i = 0; i < this.alimentos.length; i++) {
@@ -73,6 +91,11 @@ public class Menu {
 		}
 	}
 	
+	
+	/**
+	 * Metodo que quita alimento de la lista
+	 * @param a alimetno a quitar
+	 */
 	public void quitarAlimento(Alimento a) {
 		for (int i = 0; i < alimentos.length; i++) {
 			try {
@@ -87,6 +110,11 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Metodo que valida si el elemento ya fue agregado
+	 * @param a alimetno validar
+	 * @return Booleano
+	 */
 	public boolean valAlimento(Alimento a) {
 		for (int i = 0; i < this.alimentos.length; i++) {
 			if(this.alimentos[i] != null && this.alimentos[i].equals(a)) {
@@ -96,6 +124,9 @@ public class Menu {
 		return false;
 	}
 	
+	/**
+	 * Metodo que muestra la lista de alimentos
+	 */
 	public String toString() {
 		String r  = "";
 		for (int i = 0; i < this.alimentos.length; i++) {
