@@ -21,13 +21,11 @@ public class View {
 		String a = JOptionPane.showInputDialog(titulo);
 		int num = 0;
 		while (!esNumeroInt(a)) {
-			if(a != "") {
-				mostrarError("ERROR.. NO ES ENTERO.");
-				a = JOptionPane.showInputDialog(titulo);
-				num = 0;
-			}else {
-				System.exit(0);
-			}
+
+
+			System.out.println("ERROR.. NO ES ENTERO.");
+			a = JOptionPane.showInputDialog(titulo);
+			num = 0;
 
 		}
 		num = Integer.parseInt(a);
@@ -36,7 +34,7 @@ public class View {
 		return num;
 	}
 
-	private boolean esNumeroInt(String mensaje) {
+	public boolean esNumeroInt(String mensaje) {
 		try {
 			Integer.parseInt(mensaje);
 			return true;
@@ -48,7 +46,7 @@ public class View {
 	public String menuPrincipal() {
 		Object[] opciones = { "1. Nutricionista - Backtracking", "2. Backtracking-2", "3. Rama y poda", "4. Salir" };
 		Object opcion = JOptionPane.showInputDialog(null,
-				"      ..: Bienvenido señor usuario :..                "
+				"      ..: Bienvenido seÃ±or usuario :..                "
 						+ "\n\n\nSelecciona un operacion a realizar:    ",
 				"Elegir", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (opcion == null) {
