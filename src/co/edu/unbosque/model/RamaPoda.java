@@ -42,7 +42,7 @@ public class RamaPoda {
 
 	public void recorridos(int destinox, int destinoy, int iteracion, int cont) {
 		String res = "";
-		System.out.println(cont );
+	
 		if (posx == destinox && posy == destinoy) {
 			res = "El destino es igual a la posicion del conejo";
 
@@ -54,11 +54,12 @@ public class RamaPoda {
 
 			} else {
 				if (recorridos.get(iteracion).isEmpty()) {
-
+					
+					System.out.println("entro");
 					List temp = new ArrayList<>();
 					recorridos.add(temp);
 					recorridos.get(iteracion).add(new Posicion(posx, posy + 1));
-					recorridos(destinox, destinoy, iteracion, cont++);
+					recorridos(destinox, destinoy, iteracion, cont);
 
 				} else {
 
@@ -71,13 +72,16 @@ public class RamaPoda {
 							
 							recorridos.get(iteracion).add(new Posicion(posx + 1, posy));
 							recorridos(destinox, destinoy, iteracion, cont++);
-							System.out.println("entro par");
+							System.out.println(cont);
+							
 						} else if (cont % 2 == 1) {
 							
 							recorridos.get(iteracion).add(new Posicion(posx, posy + 1));
 							recorridos(destinox, destinoy, iteracion, cont++);
-							System.out.println("entro impar");
+							System.out.println(cont);
 						}
+					}else {
+						System.out.println("no entro :c");
 					}
 
 				}
