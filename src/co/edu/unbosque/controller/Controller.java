@@ -35,7 +35,7 @@ public class Controller {
 			break;
 
 		case "2. Backtracking-2":
-			view.mostrarMensaje("Juanma Care monda");
+			view.mostrarMensaje("Juanma Care monda xddd");
 			break;
 
 		case "3. Rama y poda":
