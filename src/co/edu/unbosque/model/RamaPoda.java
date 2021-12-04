@@ -1,6 +1,7 @@
 package co.edu.unbosque.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RamaPoda {
@@ -8,7 +9,7 @@ public class RamaPoda {
 	public int[][] campo;
 	public int columnas;
 	public int filas;
-	public List<List<Integer>> recorridos;
+	public List<List<Posicion>> recorridos;
 	public int posx;
 	public int posy;
 
@@ -18,7 +19,7 @@ public class RamaPoda {
 		posy = 0;
 		posx = 0;
 		campo = new int[filas][columnas];
-		recorridos = new ArrayList<>();
+		recorridos = new ArrayList<List<Posicion>>();
 	}
 
 	public String mostrarMatriz() {
@@ -39,14 +40,64 @@ public class RamaPoda {
 		campo[x][y] = 1;
 	}
 
-	public String recorridos(int destinox, int destinoy, int iteracion) {
+	public void recorridos(int destinox, int destinoy, int iteracion, int cont) {
 		String res = "";
+		System.out.println(cont );
 		if (posx == destinox && posy == destinoy) {
-				res = "El destino es igual a la posicion del conejo";
+			res = "El destino es igual a la posicion del conejo";
+
+		} else if (iteracion == 0) {
+			if (recorridos.isEmpty()) {
+
+				recorridos.add(new ArrayList<Posicion>());
+				recorridos(destinox, destinoy, iteracion, cont);
+
+			} else {
+				if (recorridos.get(iteracion).isEmpty()) {
+
+					List temp = new ArrayList<>();
+					recorridos.add(temp);
+					recorridos.get(iteracion).add(new Posicion(posx, posy + 1));
+					recorridos(destinox, destinoy, iteracion, cont++);
+
+				} else {
+
+					if (recorridos.get(iteracion).get(cont).getX() != destinox
+							&& recorridos.get(iteracion).get(cont).getY() != destinoy) {
+						// si aun no encuentra la pos final
+						
+						
+						if ( cont % 2 == 0) {
+							
+							recorridos.get(iteracion).add(new Posicion(posx + 1, posy));
+							recorridos(destinox, destinoy, iteracion, cont++);
+							System.out.println("entro par");
+						} else if (cont % 2 == 1) {
+							
+							recorridos.get(iteracion).add(new Posicion(posx, posy + 1));
+							recorridos(destinox, destinoy, iteracion, cont++);
+							System.out.println("entro impar");
+						}
+					}
+
+				}
+			}
+
 		}
-		
+
+	}
+
+	public String mostrarLista() {
+
+		String res = "";
+		for (int i = 0; i < recorridos.size(); i++) {
+			for (int j = 0; j < recorridos.get(i).size(); j++) {
+				res += recorridos.get(i).get(j).toString() + " ";
+			}
+		}
+
 		return res;
-		
+
 	}
 
 }

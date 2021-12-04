@@ -30,25 +30,23 @@ public class Controller {
 
 			String[] datos = dimenciones.split("-");
 
-			try {
+			poda = new RamaPoda(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]));
 
-				poda = new RamaPoda(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]));
+			int x = view.capturarInt("Ingrese posicion del conejo para el eje x: ");
+			int y = view.capturarInt("Ingrese posicion del conejo para el eje y: ");
 
-				int x = view.capturarInt("Ingrese posicion del conejo para el eje x: ");
-				int y = view.capturarInt("Ingrese posicion del conejo para el eje y: ");
+			poda.inicializarConejo(x, y);
 
-				poda.inicializarConejo(x, y);
+			String posfin = view.capturarString("Conejo posicionado en " + x + " y " + y + "\n\n" + poda.mostrarMatriz()
+					+ "\nPor favor ingrese posicion a la cual quier que se mueva el conejo, separado por ( - )");
 
-				String posfin = view.capturarString("Conejo posicionado en " + x + " y " + y + "\n\n"
-						+ poda.mostrarMatriz()
-						+ "\nPor favor ingrese posicion a la cual quier que se mueva el conejo, separado por ( - )");
+			datos = posfin.split("-");
 
-				datos = posfin.split("-");
-				
+			poda.recorridos(Integer.parseInt(datos[0]), Integer.parseInt(datos[0]), 0, 0);
 			
-				 
-				 view.mostrarMensaje(poda.recorridos(Integer.parseInt(datos[0]), Integer.parseInt(datos[0]), 0));
-				
+			view.mostrarMensaje(poda.mostrarLista());
+
+			try {
 
 			} catch (Exception e) {
 				view.mostrarMensaje("Datos invalidos, recuerde que los datos deben estar separados por ; (25;25)");
