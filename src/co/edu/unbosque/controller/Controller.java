@@ -1,11 +1,12 @@
 package co.edu.unbosque.controller;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import co.edu.unbosque.model.Alimento;
 import co.edu.unbosque.model.Menu;
 import co.edu.unbosque.model.RamaPoda;
 import co.edu.unbosque.view.View;
-
 
 /**
  * 
@@ -17,15 +18,12 @@ public class Controller {
 	private View view;
 	private RamaPoda poda;
 
-	
-	
 	public Controller() {
 
 		view = new View();
 		funcionar();
 	}
 
-	
 	/**
 	 * Metodo encargado de hacer funcionar el programa
 	 */
@@ -48,13 +46,21 @@ public class Controller {
 			break;
 
 		case "2. Backtracking-2":
-			view.mostrarMensaje("Juanma Care monda xddd");
+			int equipos = view.capturarInt("Ingrese la cantidad de equipos: ");
+			int arbitros = view.capturarInt("Ingrese la cantidad de arbitros:");
+			if(equipos % 2 != 0 || arbitros < equipos % 2) {
+				view.mostrarError("Nota:\nEl numero de equipos debe ser par\nLa cantidad de arbitros debe ser mayor a la cantidad de equipos entre 2");
+			}else {
+				crearPuntuacion(equipos, arbitros);
+			}
+			default:
+				view.mostrarMensaje("Cambiando de ejercicio...");
+
 			break;
 
 		case "3. Rama y poda":
-			String dimenciones = view.capturarString(
-					"Ingrese cantidad dimenciones del campo separados por ( - )\nprimero las filas luego las columnas:  ");
-			String[] datos = dimenciones.split("-");
+			String dimensiones = view.capturarString("Ingrese cantidad dimensiones del campo separados por (,)\nPrimero las filas luego las columnas:  ");
+			String[] datos = dimensiones.split("-");
 			try {
 
 				poda = new RamaPoda(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]));
@@ -76,7 +82,7 @@ public class Controller {
 
 			} catch (Exception e) {
 				view.mostrarMensaje("Datos invalidos, recuerde que los datos deben estar separados por ; (25;25)");
-				dimenciones = null;
+				dimensiones = null;
 				datos = null;
 				funcionar();
 
@@ -86,10 +92,11 @@ public class Controller {
 		case "4. Salir":
 
 			break;
-
 		}
 	}
 
+
+	
 	public Alimento[] retornarAlimentos() {
 		Alimento[] alimentos = { new Alimento("Tamal", 900), new Alimento("Jugo de mora", 300),
 				new Alimento("Ensalda césar", 120), new Alimento("Gaseosa", 450), new Alimento("Lentejas", 250),
@@ -159,5 +166,20 @@ public class Controller {
 				}
 			}
 		}
+	}
+
+	public int[][] crearPuntuacion(int f, int c) {
+		int[][] puntos = new int[f][c];
+		for (int i = 1; i <= f; i++) {
+			for (int j = 1; j <= c; j++) {
+				puntos[i][j] = view.capturarInt("Puntos equipo:" + i + " con arbitro: " + (j));
+				while (puntos[i][j] < 0 || puntos[i][j] > 10) {
+					view.mostrarError("Debe ingresar una puntuación entre 1 a 10");
+					puntos[i][j] = view.capturarInt(
+							"Puntos equipo:" + i + " con arbitro " + j);
+				}
+			}
+		}
+		return puntos;
 	}
 }

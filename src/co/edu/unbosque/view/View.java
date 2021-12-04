@@ -49,15 +49,10 @@ public class View {
 		String a = JOptionPane.showInputDialog(titulo);
 		int num = 0;
 		while (!esNumeroInt(a)) {
-
-
-			System.out.println("ERROR.. NO ES ENTERO.");
 			a = JOptionPane.showInputDialog(titulo);
 			num = 0;
-
 		}
 		num = Integer.parseInt(a);
-		System.out.println("DATO INGRESADO CON EXITO.");
 
 		return num;
 	}
